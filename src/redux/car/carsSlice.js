@@ -1,34 +1,58 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchAdverts } from './operations';
 
+const initialState = {
+  cars: [],
+  isLoading: false,
+  error: null,
+  filter: "",
+};
+
 const handlePending = (state) => {
   state.isLoading = true;
+  state.error = '';
 };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
 };
-export const handleFulfilled = (state, action) => {
-    state.isLoading = false;
-    state.isError = null;
-    state.cars = action.payload;
-  };
 
-export const carsSlice = createSlice({
-  name: 'cars',
-  initialState: {
-    items: [],
-    isLoading: false,
-    error: null,
+const handleFulfilled = (state) => {
+  state.isLoading = false;
+};
+
+const fetchAllAdverts = (state, { payload }) => {
+  state.isLoading = false;
+  state.cars = payload;
+};
+
+
+const carsSlice = createSlice({
+  name: 'adverts',
+  initialState,
+  reducers: {
+    updateFilter(state, action) {
+      state.filter = action.payload;
+    },
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAdverts.pending, handlePending)
-      .addCase(fetchAdverts.fulfilled,handleFulfilled) 
-      .addCase(fetchAdverts.rejected, handleRejected);
+      .addCase(fetchAdverts.fulfilled, fetchAllAdverts)
+      .addMatcher(
+        (action) => action.type.endsWith('/pending'),
+        handlePending
+      )
+      .addMatcher(
+        (action) => action.type.endsWith('/rejected'),
+        handleRejected
+      )
+      .addMatcher(
+        (action) => action.type.endsWith('/fulfilled'),
+        handleFulfilled
+      );
   },
 });
 
-export const carsReducer = carsSlice.reducer;
+export default carsSlice.reducer;
+export const { updateFilter } = carsSlice.actions;
