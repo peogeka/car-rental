@@ -17,6 +17,8 @@ import {
   BlueText,
   RentalItem,
   ConditionText,
+  Close,
+  Title,
 } from './CardModal.styled';
 
 export const CarModal = ({ car, onClose }) => {
@@ -70,9 +72,9 @@ export const CarModal = ({ car, onClose }) => {
           <div>{imgError ? 'Failed to load image' : 'No image'}</div>
         )}
         <ModalInfo>
-          <h3>
+          <Title>
             {car.make} <Accent>{car.model}</Accent>, {car.year}
-          </h3>
+          </Title>
           <div>
             <InfoList>
               <li>{city}</li>
@@ -118,7 +120,9 @@ export const CarModal = ({ car, onClose }) => {
           </RentalList>
           <RentalCarBtn href={`tel:+380730000000`}>Rental car</RentalCarBtn>
         </ModalInfo>
-        <CloseBtn onClick={onClose}>Close</CloseBtn>
+        <CloseBtn onClick={onClose}>
+          <Close />
+        </CloseBtn>
       </ModalContent>
     </ModalOverlay>
   );

@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import { ReactComponent as CloseIcon } from '../Images/x.svg';
+export const Close = styled(CloseIcon)`
+  
+`;
+export const Title = styled.h3`
+margin-bottom: 8px`
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -100,7 +106,7 @@ export const RentalList = styled.ul`
 
 export const RentalItem = styled.li`
   color: #363535;
-  font-family: Montserrat;
+  
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -157,7 +163,7 @@ export const CloseBtn = styled.button`
   top: 16px;
   right: 16px;
   z-index: 15;
-
+  border: none;
   padding: 0;
   margin: 0;
   background-color: transparent;

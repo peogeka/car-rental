@@ -1,10 +1,11 @@
 import React from 'react';
-import { SectionHome } from './Home.styled';
+import { SectionHome, TitleText } from './Home.styled';
+
 
 export const Home = () => {
   return (
     <SectionHome>
-      <h1>Car rental – find an offer, compare and save!</h1>
+      <TitleText>Welcome to Auto Rent</TitleText>
     </SectionHome>
   );
 };

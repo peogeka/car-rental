@@ -126,21 +126,3 @@ export const BtnSearch = styled.button`
     background-color: #0B44CD;
   }
 `;
-
-export const ResetButton = styled.button`
-  width: 136px;
-  height: 48px;
-  padding: 4px 30px;
-  border: none;
-  border-radius: 12px;
-  background-color: #3470FF;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 19px;
-  transition: background-color 0.3s ease;
-
-  &:hover,
-  &:focus {
-    background-color: #0B44CD;
-  }
-`;

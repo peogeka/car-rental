@@ -1,5 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
+
+body{
+  font-family: "Manrope", sans-serif;
+}
 img {
   display: block;
   max-width: 100%;

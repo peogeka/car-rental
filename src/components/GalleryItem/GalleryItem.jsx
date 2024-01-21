@@ -5,17 +5,26 @@ import {
   addFavorite,
 } from '../../redux/favorite/favorite.slice';
 import CarModal from '../CardModal/CardModal';
-import { CardCar, Card, ImgCar, Btn, InfoCar,CardTitle,Accent,TitlePrice,AddInfo, CardBtn,AdditionalInfoListEllipsis } from './GalleryItem.styled';
-// import sprite from '../Images/sprite.svg'
+import {
+  CardCar,
+  Card,
+  ImgCar,
+  Btn,
+  InfoCar,
+  CardTitle,
+  Accent,
+  TitlePrice,
+  AddInfo,
+  CardBtn,
+  AdditionalInfoListEllipsis,
+  Heart,
+  VerticalLine,
+} from './GalleryItem.styled';
+// import sprite from '../Images/sprite.svg';
 export const GalleryItem = ({ car }) => {
   const dispatch = useDispatch();
   const [isButtonClicked, setIsButtonClicked] = useState(
     () => localStorage.getItem(`favorite-${car.id}`) === 'true'
-  );
-  const strokeColor = isButtonClicked ? '#000' : '#3470ff';
-  document.documentElement.style.setProperty(
-    '--button-stroke-color',
-    strokeColor
   );
 
   const [imgError, setImgError] = useState(false);
@@ -80,7 +89,7 @@ export const GalleryItem = ({ car }) => {
             <div>No image</div>
           )}
           <Btn type="button" onClick={handleButtonClick}>
-          {/* <use href={sprite + "#icon-normal"}></use> */}
+            <Heart />
           </Btn>
         </Card>
         <InfoCar>
@@ -92,18 +101,18 @@ export const GalleryItem = ({ car }) => {
         <AddInfo>
           <AdditionalInfoListEllipsis>
             <li>{city}</li>
-            <span></span>
+            <VerticalLine></VerticalLine>
             <li>{country}</li>
-            <span></span>
+            <VerticalLine></VerticalLine>
             <li>{car.rentalCompany}</li>
             {rentalPriceNumber >= 30 && <p>Premium</p>}
-            <span></span>
+            <VerticalLine></VerticalLine>
             <li>{car.type}</li>
-            <span></span>
+            <VerticalLine></VerticalLine>
             <li>{car.model}</li>
-            <span></span>
+            <VerticalLine></VerticalLine>
             <li>{car.mileage}</li>
-            <span></span>
+            <VerticalLine></VerticalLine>
             <li>{car.accessories[0]}</li>
           </AdditionalInfoListEllipsis>
         </AddInfo>
