@@ -6,6 +6,7 @@ export const LoadMoreBtn = styled.button`
     background-color: transparent;
     border: none;
     color: #3470FF;
+    margin-bottom: 44px;
 
    font-size: 16px;
    font-weight: 500;

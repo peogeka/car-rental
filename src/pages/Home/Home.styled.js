@@ -9,7 +9,8 @@ export const SectionHome = styled.section`
   min-height: 900px;
 `;
 export const TitleText = styled.h1`
-    font-size: 100px;
-    text-align: center;
-    padding-top: 50px;
-    color: #0b305b`
+  font-size: 100px;
+  text-align: center;
+  padding-top: 50px;
+  color: #0b305b;
+`;

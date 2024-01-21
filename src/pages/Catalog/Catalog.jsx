@@ -4,11 +4,7 @@ import { Gallery } from '../../components/Gallery/Gallery';
 import { fetchAdverts } from '../../redux/car/operations';
 import { SearchForm } from '../../components/SearchForm/SearchForm'
 import {
-  updateSelectedCar,
-  updateHourlyRate,
-  updateMileageFrom,
-  updateMileageTo,
-  updatePage,
+    updatePage,
 } from '../../redux/filter/filterSlice';
 import { LoadMoreBtn } from './Catalog.styled';
 
@@ -21,10 +17,7 @@ export const Catalog = () => {
 
 
   const handleSearch = (newFilters) => {
-    dispatch(updateSelectedCar(newFilters.selectedCar));
-    dispatch(updateHourlyRate(newFilters.hourlyRate));
-    dispatch(updateMileageFrom(newFilters.mileageFrom));
-    dispatch(updateMileageTo(newFilters.mileageTo));
+  
     dispatch(fetchAdverts(newFilters));
     dispatch(updatePage(1));
     dispatch(fetchAdverts({ ...newFilters, page: 1 }));
