@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
-import { ModalOverlay } from './CardModal.styled';
-
-
+import {
+  ModalOverlay,
+  ModalContent,
+  CloseBtn,
+  RentalCarBtn,
+  ModalImg,
+  ModalInfo,
+  Accent,
+  InfoList,
+  Line,
+  Description,
+  CardSubTitle,
+  FunctionalitiesList,
+  RentalList,
+  BlueText,
+  RentalItem,
+  ConditionText,
+} from './CardModal.styled';
 
 export const CarModal = ({ car, onClose }) => {
   const [imgError, setImgError] = useState(false);
@@ -43,11 +58,10 @@ export const CarModal = ({ car, onClose }) => {
   };
 
   return (
-   
-      <ModalOverlay onClick={onClose}>
-      <div onClick={e => e.stopPropagation()}>
+    <ModalOverlay onClick={onClose}>
+      <ModalContent onClick={e => e.stopPropagation()}>
         {car.img && !imgError ? (
-          <img
+          <ModalImg
             src={car.img}
             alt={`${car.make} ${car.model}`}
             onError={handleImgError}
@@ -55,59 +69,58 @@ export const CarModal = ({ car, onClose }) => {
         ) : (
           <div>{imgError ? 'Failed to load image' : 'No image'}</div>
         )}
-        <div>
+        <ModalInfo>
           <h3>
-            {car.make} <span>{car.model}</span>, {car.year}
+            {car.make} <Accent>{car.model}</Accent>, {car.year}
           </h3>
           <div>
-            <ul>
+            <InfoList>
               <li>{city}</li>
-              {city && country && <span></span>}
+              {city && country && <Line></Line>}
               <li>{country}</li>
-              {country && <span></span>}
+              {country && <Line></Line>}
               <li>Id: {car.id}</li>
-              <span></span>
+              <Line></Line>
               <li>Year: {car.year}</li>
-              <span></span>
+              <Line></Line>
               <li>Type: {car.type}</li>
               <li>Fuel Consumption: {car.fuelConsumption}</li>
-              <span></span>
+              <Line></Line>
               <li>Engine Size: {car.engineSize}</li>
-            </ul>
+            </InfoList>
           </div>
-          <p>{car.description}</p>
-          <p>Accessories and functionalities:</p>
-          <ul>
+          <Description>{car.description}</Description>
+          <CardSubTitle>Accessories and functionalities:</CardSubTitle>
+          <FunctionalitiesList>
             {[...car.accessories, ...car.functionalities].map((item, index) => (
               <React.Fragment key={index}>
                 <li>{item}</li>
                 {index !==
                   car.accessories.length + car.functionalities.length - 1 && (
-                  <span></span>
+                  <Line></Line>
                 )}
               </React.Fragment>
             ))}
-          </ul>
-          <p>Rental Conditions:</p>
-          <ul>
+          </FunctionalitiesList>
+          <CardSubTitle>Rental Conditions:</CardSubTitle>
+          <RentalList>
             {rentalConditionsArray.map((condition, index) => (
-              <li key={index}>
-                <span>{condition}</span>
-              </li>
+              <RentalItem key={index}>
+                <ConditionText>{condition}</ConditionText>
+              </RentalItem>
             ))}
-            <li>
-              Mileage: <span>{car.mileage / 1000}</span>
-            </li>
-            <li>
-              Price: <span>{car.rentalPrice}</span>
-            </li>
-          </ul>
-          <a href={`tel:+380730000000`}>Rental car</a>
-        </div>
-        <button onClick={onClose}>Close</button>
-      </div>
+            <RentalItem>
+              Mileage: <BlueText>{car.mileage / 1000}</BlueText>
+            </RentalItem>
+            <RentalItem>
+              Price: <BlueText>{car.rentalPrice}</BlueText>
+            </RentalItem>
+          </RentalList>
+          <RentalCarBtn href={`tel:+380730000000`}>Rental car</RentalCarBtn>
+        </ModalInfo>
+        <CloseBtn onClick={onClose}>Close</CloseBtn>
+      </ModalContent>
     </ModalOverlay>
-    
   );
 };
 
