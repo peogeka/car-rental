@@ -6,7 +6,7 @@ import {
 } from '../../redux/favorite/favorite.slice';
 import CarModal from '../CardModal/CardModal';
 import { CardCar, Card, ImgCar, Btn, InfoCar,CardTitle,Accent,TitlePrice,AddInfo, CardBtn,AdditionalInfoListEllipsis } from './GalleryItem.styled';
-
+// import sprite from '../Images/sprite.svg'
 export const GalleryItem = ({ car }) => {
   const dispatch = useDispatch();
   const [isButtonClicked, setIsButtonClicked] = useState(
@@ -79,7 +79,9 @@ export const GalleryItem = ({ car }) => {
           ) : (
             <div>No image</div>
           )}
-          <Btn type="button" onClick={handleButtonClick}></Btn>
+          <Btn type="button" onClick={handleButtonClick}>
+          {/* <use href={sprite + "#icon-normal"}></use> */}
+          </Btn>
         </Card>
         <InfoCar>
           <CardTitle>

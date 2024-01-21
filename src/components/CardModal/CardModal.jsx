@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import { ModalOverlay } from './CardModal.styled';
+
+
+
 export const CarModal = ({ car, onClose }) => {
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
-    const handleKeyPress = (e) => {
+    const handleKeyPress = e => {
       if (e.key === 'Escape') {
         onClose();
       }
@@ -17,22 +21,31 @@ export const CarModal = ({ car, onClose }) => {
     };
   }, [onClose]);
 
+  useEffect(() => {
+    document.body.classList.add('modalOpen');
 
+    return () => {
+      document.body.classList.remove('modalOpen');
+    };
+  }, []);
 
   const cityRegex = /,\s*([^,]+),\s*([^,]+)$/;
   const match = car.address.match(cityRegex);
   const city = match ? match[1] : null;
   const country = match ? match[2] : null;
 
-  const rentalConditionsArray = car.rentalConditions.split('\n').filter(Boolean);
+  const rentalConditionsArray = car.rentalConditions
+    .split('\n')
+    .filter(Boolean);
 
   const handleImgError = () => {
     setImgError(true);
   };
 
   return (
-    <div onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()}>
+   
+      <ModalOverlay onClick={onClose}>
+      <div onClick={e => e.stopPropagation()}>
         {car.img && !imgError ? (
           <img
             src={car.img}
@@ -68,7 +81,8 @@ export const CarModal = ({ car, onClose }) => {
             {[...car.accessories, ...car.functionalities].map((item, index) => (
               <React.Fragment key={index}>
                 <li>{item}</li>
-                {index !== car.accessories.length + car.functionalities.length - 1 && (
+                {index !==
+                  car.accessories.length + car.functionalities.length - 1 && (
                   <span></span>
                 )}
               </React.Fragment>
@@ -81,14 +95,19 @@ export const CarModal = ({ car, onClose }) => {
                 <span>{condition}</span>
               </li>
             ))}
-            <li>Mileage: <span>{car.mileage / 1000}</span></li>
-            <li>Price: <span>{car.rentalPrice}</span></li>
+            <li>
+              Mileage: <span>{car.mileage / 1000}</span>
+            </li>
+            <li>
+              Price: <span>{car.rentalPrice}</span>
+            </li>
           </ul>
           <a href={`tel:+380730000000`}>Rental car</a>
         </div>
         <button onClick={onClose}>Close</button>
       </div>
-    </div>
+    </ModalOverlay>
+    
   );
 };
 

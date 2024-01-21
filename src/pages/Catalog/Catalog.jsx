@@ -10,6 +10,7 @@ import {
   updateMileageTo,
   updatePage,
 } from '../../redux/filter/filterSlice';
+import { LoadMoreBtn } from './Catalog.styled';
 
 
 export const Catalog = () => {
@@ -42,7 +43,7 @@ export const Catalog = () => {
     <div>
       <SearchForm onSearch={handleSearch} />
       <Gallery cars={cars} renderAllImages={true} />
-      <button onClick={handleLoadMore}>Load more</button>
+      <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
     </div>
   );
 };

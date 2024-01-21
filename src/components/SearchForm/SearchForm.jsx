@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {resetFilters} from '../../redux/filter/filterSlice';
 import { fetchAdverts, fetchBrends } from '../../redux/car/operations';
+import { SearchFormContainer, LabelForm,BrandSelect,Select,LebelWrap,InputWrap,InputLeft,InputRight,BtnSearch,ResetButton  } from './SearchForm.styled';
 
 export const SearchForm = ({ onSearch }) => {
   const dispatch = useDispatch();
@@ -61,36 +62,36 @@ export const SearchForm = ({ onSearch }) => {
   }, [dispatch, selectedCar, hourlyRate, mileageFrom, mileageTo]);
 
   return (
-    <div >
-      <label>
+    <SearchFormContainer>
+      <LabelForm>
         Car brand
-        <select value={filters.selectedCar} onChange={handleCarChange}>
+        <BrandSelect value={filters.selectedCar} onChange={handleCarChange}>
           <option value="">All Cars</option>
           {uniqueCarBrands.map((brand) => (
             <option key={brand} value={brand}>
               {brand}
             </option>
           ))}
-        </select>
-      </label>
+        </BrandSelect>
+      </LabelForm>
 
-      <label>
+      <LabelForm>
         Price/ 1 hour
-        <select value={filters.hourlyRate} onChange={handleHourlyRateChange}>
+        <Select value={filters.hourlyRate} onChange={handleHourlyRateChange}>
           <option value="">To $</option>
           {uniqueHourlyRates.map((rate) => (
             <option key={rate} value={rate}>
               {rate}
             </option>
           ))}
-        </select>
-      </label>
-      <div>
-        <label>
+        </Select>
+      </LabelForm>
+      <LebelWrap>
+        <LabelForm>
           Сar mileage / km
-        </label>
-        <div>
-          <input
+        </LabelForm>
+        <InputWrap>
+          <InputLeft
             type="number"
             placeholder={`From (${minMileage})`}
             value={filters.mileageFrom}
@@ -98,8 +99,7 @@ export const SearchForm = ({ onSearch }) => {
             step={10}
             onChange={handleMileageFromChange}
           />
-          <input
-           
+          <InputRight
             type="number"
             placeholder={`To (${maxMileage})`}
             value={filters.mileageTo}
@@ -108,15 +108,15 @@ export const SearchForm = ({ onSearch }) => {
             step={10}
             onChange={handleMileageToChange}
           />
-        </div>
-      </div>
-      <button type="button" onClick={handleSearch}>
+        </InputWrap>
+      </LebelWrap>
+      <BtnSearch  type="button" onClick={handleSearch}>
         Search
-      </button>
-      <button type="button" onClick={handleResetFilters}>
+      </BtnSearch>
+      <ResetButton type="button" onClick={handleResetFilters}>
         Reset Filters
-      </button>
-    </div>
+      </ResetButton>
+    </SearchFormContainer>
   );
 };
 
