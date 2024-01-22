@@ -29,6 +29,10 @@ export const GalleryItem = ({ car }) => {
   );
   const [imgError, setImgError] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [favorites, setFavorites] = useState(
+  () => JSON.parse(localStorage.getItem('favorites')) || []
+);
+const isInFavorites = favorites.some((favorite) => favorite.id === car.id);
 
   useEffect(() => {
     localStorage.setItem(`favorite-${car.id}`, String(isButtonClicked));
@@ -40,11 +44,16 @@ export const GalleryItem = ({ car }) => {
 
   const handleButtonClick = () => {
     setIsButtonClicked(prevState => {
+      let updatedFavorites;
       if (prevState) {
+        updatedFavorites = favorites.filter((favorite) => favorite.id !== car.id);
         dispatch(removeFavorite(car));
       } else {
+        updatedFavorites = [...favorites, car];
         dispatch(addFavorite(car));
       }
+      setFavorites(updatedFavorites);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       return !prevState;
     });
   };
@@ -78,7 +87,7 @@ export const GalleryItem = ({ car }) => {
           <div>No image</div>
         )}
         <Btn type="button" onClick={handleButtonClick}>
-          <Heart isButtonClicked={isButtonClicked} />
+        <Heart isButtonClicked={isInFavorites} />
         </Btn>
       </Card>
       <InfoCar>
