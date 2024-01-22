@@ -78,7 +78,7 @@ export const GalleryItem = ({ car }) => {
           <div>No image</div>
         )}
         <Btn type="button" onClick={handleButtonClick}>
-          <Heart />
+          <Heart isButtonClicked={isButtonClicked} />
         </Btn>
       </Card>
       <InfoCar>

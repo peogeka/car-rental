@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { ReactComponent as HeartIcon } from '../Images/normal.svg';
 export const Heart = styled(HeartIcon)`
+  fill: ${({ isButtonClicked }) => (isButtonClicked ? '#3470ff' : '')};
+
   &:hover {
-    fill: #3470ff;
+    fill: ${({ isButtonClicked }) => (isButtonClicked ? '#3470ff' : '')};
   }
 
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -45,6 +47,7 @@ export const Btn = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
+  
 `;
 
 export const Icon = styled.svg`
