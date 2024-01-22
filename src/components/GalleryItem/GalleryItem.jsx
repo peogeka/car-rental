@@ -29,10 +29,6 @@ export const GalleryItem = ({ car }) => {
   );
   const [imgError, setImgError] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [favorites, setFavorites] = useState(
-  () => JSON.parse(localStorage.getItem('favorites')) || []
-);
-const isInFavorites = favorites.some((favorite) => favorite.id === car.id);
 
   useEffect(() => {
     localStorage.setItem(`favorite-${car.id}`, String(isButtonClicked));
@@ -43,19 +39,14 @@ const isInFavorites = favorites.some((favorite) => favorite.id === car.id);
   };
 
   const handleButtonClick = () => {
-    setIsButtonClicked(prevState => {
-      let updatedFavorites;
-      if (prevState) {
-        updatedFavorites = favorites.filter((favorite) => favorite.id !== car.id);
-        dispatch(removeFavorite(car));
-      } else {
-        updatedFavorites = [...favorites, car];
-        dispatch(addFavorite(car));
-      }
-      setFavorites(updatedFavorites);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      return !prevState;
-    });
+    setIsButtonClicked(!isButtonClicked);
+    localStorage.setItem(`favorite-${car.id}`, String(!isButtonClicked));
+
+    if (isButtonClicked) {
+      dispatch(removeFavorite(car));
+    } else {
+      dispatch(addFavorite(car));
+    }
   };
 
   const handleLearnMoreClick = () => {
@@ -87,7 +78,11 @@ const isInFavorites = favorites.some((favorite) => favorite.id === car.id);
           <div>No image</div>
         )}
         <Btn type="button" onClick={handleButtonClick}>
-        <Heart isButtonClicked={isInFavorites} />
+          <Heart
+            className={`icon ${isButtonClicked ? 'blueIcon' : ''}`}
+            fill={isButtonClicked ? '#3470ff' : 'none'}
+            stroke={isButtonClicked && !imgError ? '#3470ff' : 'none'}
+          />
         </Btn>
       </Card>
       <InfoCar>

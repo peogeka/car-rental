@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 import { ReactComponent as HeartIcon } from '../Images/normal.svg';
 export const Heart = styled(HeartIcon)`
-  fill: ${({ isButtonClicked }) => (isButtonClicked ? '#3470ff' : '')};
-
-  &:hover {
-    fill: ${({ isButtonClicked }) => (isButtonClicked ? '#3470ff' : '')};
+  &.icon {
+    width: 18px;
+    height: 18px;
   }
 
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  cursor: pointer;
+  
+  &.blueIcon {
+    fill: #3470ff;
+    stroke: #3470ff;
+  }
 `;
+
+
+
+export const IconSvg = styled.svg`
+width: 18px;
+  height: 18px;`
+
 export const VerticalLine = styled.span`
   height: 16px;
   width: 1px;
