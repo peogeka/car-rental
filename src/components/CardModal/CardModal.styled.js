@@ -36,6 +36,7 @@ export const ModalImg = styled.img`
   max-height: 314px;
   object-fit: cover;
   border-radius: 5px;
+  height: 248px;
 `;
 
 export const ModalInfo = styled.div`

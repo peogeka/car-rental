@@ -4,11 +4,9 @@ import { GalleryItem } from '../GalleryItem/GalleryItem';
 import { GalleryContainer } from './Gallery.styled';
 
 export const Gallery = ({ cars, renderAllImages }) => {
-  const selectedBrandCatalog = useSelector(state => state.filters.selectedCar);
-  const selectedBrandFavorites = useSelector(
-    state => state.favorites.selectedCar
-  );
-  const favoriteCars = useSelector(state => state.favorites.favoriteCars);
+  const { selectedCar: selectedBrandCatalog } = useSelector(state => state.filters);
+  const { selectedCar: selectedBrandFavorites } = useSelector(state => state.favorites);
+  const { favoriteCars } = useSelector(state => state.favorites);
 
   const filteredByBrandCatalog = selectedBrandCatalog
     ? cars.filter(car => car.make === selectedBrandCatalog)
