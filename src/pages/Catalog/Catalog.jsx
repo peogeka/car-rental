@@ -2,19 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Gallery } from '../../components/Gallery/Gallery';
 import { fetchAdverts } from '../../redux/car/operations';
-import { SearchForm } from '../../components/SearchForm/SearchForm'
-import {
-    updatePage,updateSelectedCar
-} from '../../redux/filter/filterSlice';
+import { SearchForm } from '../../components/SearchForm/SearchForm';
+import { updatePage, updateSelectedCar } from '../../redux/filter/filterSlice';
 import { LoadMoreBtn } from './Catalog.styled';
-
 
 export const Catalog = () => {
   const dispatch = useDispatch();
   const cars = useSelector((state) => state.adverts.cars);
   const filters = useSelector((state) => state.filters);
   const page = useSelector((state) => state.filters.page);
-
 
   const handleSearch = (newFilters) => {
     dispatch(updateSelectedCar(newFilters.selectedCar));
@@ -30,7 +26,7 @@ export const Catalog = () => {
 
   useEffect(() => {
     dispatch(fetchAdverts({ ...filters, page }));
-  }, [dispatch, filters, page])
+  }, [dispatch, filters, page]);
 
   return (
     <div>
@@ -40,6 +36,5 @@ export const Catalog = () => {
     </div>
   );
 };
-
 
 export default Catalog;
